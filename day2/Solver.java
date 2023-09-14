@@ -3,7 +3,7 @@ package day2;
 import java.io.IOException;
 import java.util.List;
 
-class DayTwo {
+class Solver {
     public static void main(String... args){
         System.out.println("Hello World");
         GameInputReader gameInputReader1 = new GameInputReader("strategy1");
