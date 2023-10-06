@@ -7,23 +7,24 @@ public class Solver {
     public static void main(String... args){
 
         RucksackInputReader rucksackInputReader = new RucksackInputReader();
-        String filePath = "day3//day_3_input.txt";
-        List<Rucksack> rucksacks = null;
-        RucksackAnomalyManager rucksackAnomalyManager = new RucksackAnomalyManager();
+        String filePath = "day3//input_test.txt";
+        List<List<Rucksack>> rucksacks = null;
+        RucksackManager rucksackManager = new RucksackManager();
         try {
             rucksacks = rucksackInputReader.readInput(filePath);
+            System.out.println(rucksacks);
         } catch (IOException e) {
             System.out.println("File "+ filePath + " not found");
             System.exit(0);
         }
         char objType;
         int prioritiesSum = 0;
-        for (Rucksack rucksack : rucksacks) {
-            // System.out.println(rucksack);
-            objType = rucksackAnomalyManager.findAnomalyObjectType(rucksack);
-            prioritiesSum += rucksackAnomalyManager.findPriority(objType);
-        }
-        System.out.println(prioritiesSum);
+        // for (Rucksack rucksack : rucksacks) {
+        //     // System.out.println(rucksack);
+        //     objType = rucksackManager.findCommonObjectType(rucksack);
+        //     prioritiesSum += rucksackManager.findPriority(objType);
+        // }
+        // System.out.println(prioritiesSum);
         
     }
 }

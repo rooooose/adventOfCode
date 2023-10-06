@@ -9,16 +9,26 @@ import java.util.List;
 
 public class RucksackInputReader {
     
-    public List<Rucksack> readInput(String filepath) throws IOException {
+    public List<List<Rucksack>> readInput(String filepath) throws IOException {
 
-        List<Rucksack> rucksacks = new ArrayList<>();
         File file = new File(filepath);
+        List<List<Rucksack>> allRucksacks = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String st;
+            int itemsInGroupCounter = 3;
+            int groupNum = -1;
             while ((st = br.readLine()) != null) {
-                rucksacks.add(new Rucksack(st));
+                
+                if (itemsInGroupCounter == 3) {
+                    List<Rucksack> rucksackGroup = new ArrayList<>();
+                    allRucksacks.add(rucksackGroup);
+                    itemsInGroupCounter = 0;
+                    groupNum += 1;
+                }
+                allRucksacks.get(groupNum).add(new Rucksack(st));
+                itemsInGroupCounter += 1;
             }
         }
-        return rucksacks;
+        return allRucksacks;
     }
 }

@@ -1,8 +1,9 @@
 package day3;
 
-public class RucksackAnomalyManager {
+public class RucksackManager {
 
-    public char findAnomalyObjectType(Rucksack rucksack) {
+    //Prendre en param les séquences de strings à comparer (compartiments ou rucksacks directement)
+    public char findCommonObjectType(Rucksack rucksack) {
         String comp1 = rucksack.getCompartment1();
         String comp2 = rucksack.getCompartment2();
         char commonObjType = 'a';
