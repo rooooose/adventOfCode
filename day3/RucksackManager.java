@@ -1,21 +1,43 @@
 package day3;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class RucksackManager {
 
-    //Prendre en param les séquences de strings à comparer (compartiments ou rucksacks directement)
-    public char findCommonObjectType(Rucksack rucksack) {
-        String comp1 = rucksack.getCompartment1();
-        String comp2 = rucksack.getCompartment2();
-        char commonObjType = 'a';
+    public LinkedList<String> separateCompartments(String rucksackContent) {
+        int mid = rucksackContent.length() / 2;
+        String compartment1 = rucksackContent.substring(0, mid);
+        String compartment2 = rucksackContent.substring(mid);
+        // String[] separatedContent = {compartment1, compartment2};
+        LinkedList<String> separatedContent = new LinkedList<>();
+        separatedContent.add(compartment1);
+        separatedContent.add(compartment2);
 
-        for (int i = 0; i < comp1.length(); i++) {
-            for (int j = 0; j < comp2.length(); j++) {
-                if (comp1.charAt(i) == comp2.charAt(j)) {
-                    commonObjType = comp1.charAt(i);
+        return separatedContent;
+    }
+
+    //LinkedList ?
+    // TODO ne compare que les 2 premiers
+    public char findCommonObjectType(LinkedList<String> rucksackContents) {
+        char commonObjType = 'a';
+        String el1 = rucksackContents.get(0);
+        String el2 = rucksackContents.get(1);
+        for (char c1 : el1.toCharArray()) {
+            for (char c2 : el2.toCharArray()) {
+                if (c1 == c2) {
+                    commonObjType = c1;
                 }
             }
         }
-        // System.out.println(commonObjType);
+        rucksackContents.removeFirst();
+        rucksackContents.removeFirst();
+        rucksackContents.addFirst(String.valueOf(commonObjType));
+        while (rucksackContents.size() >= 2) {
+            findCommonObjectType(rucksackContents);
+        }
+        System.out.println(commonObjType);
         return commonObjType;
 
     }

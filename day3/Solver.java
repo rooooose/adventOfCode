@@ -1,6 +1,7 @@
 package day3;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Solver {
@@ -8,7 +9,7 @@ public class Solver {
 
         RucksackInputReader rucksackInputReader = new RucksackInputReader();
         String filePath = "day3//input_test.txt";
-        List<List<Rucksack>> rucksacks = null;
+        List<LinkedList<String>> rucksacks = null;
         RucksackManager rucksackManager = new RucksackManager();
         try {
             rucksacks = rucksackInputReader.readInput(filePath);
@@ -19,12 +20,19 @@ public class Solver {
         }
         char objType;
         int prioritiesSum = 0;
-        // for (Rucksack rucksack : rucksacks) {
-        //     // System.out.println(rucksack);
-        //     objType = rucksackManager.findCommonObjectType(rucksack);
-        //     prioritiesSum += rucksackManager.findPriority(objType);
-        // }
-        // System.out.println(prioritiesSum);
+        for (LinkedList<String> rucksackGroup : rucksacks) {
+            objType = rucksackManager.findCommonObjectType(rucksackGroup);
+            prioritiesSum += rucksackManager.findPriority(objType);
+
+            for (String rucksack : rucksackGroup) {
+                LinkedList<String> compartmentsContent = rucksackManager.separateCompartments(rucksack);
+                objType = rucksackManager.findCommonObjectType(compartmentsContent);
+                // prioritiesSum += rucksackManager.findPriority(objType);
+            }
+            // System.out.println(rucksack);
+            
+        }
+        System.out.println(prioritiesSum);
         
     }
 }

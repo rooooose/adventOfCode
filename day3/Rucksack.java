@@ -4,6 +4,11 @@ public class Rucksack {
 
     private String compartment1;
     private String compartment2;
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
 
     public String getCompartment1() {
         return compartment1;
@@ -14,6 +19,7 @@ public class Rucksack {
     }
 
     public Rucksack(String content) {
+        this.content = content;
         int mid = content.length() / 2;
         compartment1 = content.substring(0, mid);
         compartment2 = content.substring(mid);
