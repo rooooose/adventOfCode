@@ -19,26 +19,33 @@ public class RucksackManager {
     }
 
     //LinkedList ?
-    // TODO ne compare que les 2 premiers
+    // TODO ESSAYER EN NON RECURSIF / sans modifier le parametre car l'ordre d'appel en dépend du coup
     public char findCommonObjectType(LinkedList<String> rucksackContents) {
-        char commonObjType = 'a';
+        List<Character> commonObjTypes = new ArrayList<>();
         String el1 = rucksackContents.get(0);
         String el2 = rucksackContents.get(1);
         for (char c1 : el1.toCharArray()) {
             for (char c2 : el2.toCharArray()) {
                 if (c1 == c2) {
-                    commonObjType = c1;
+                    commonObjTypes.add(c1);
                 }
             }
         }
+        StringBuilder sb = new StringBuilder();
+        // Appends characters one by one
+        for (Character ch : commonObjTypes) {
+            sb.append(ch);
+        }
+        // convert in string
+        String commonObjString = sb.toString();
         rucksackContents.removeFirst();
         rucksackContents.removeFirst();
-        rucksackContents.addFirst(String.valueOf(commonObjType));
+        rucksackContents.addFirst(String.valueOf(commonObjString));
         while (rucksackContents.size() >= 2) {
             findCommonObjectType(rucksackContents);
         }
-        System.out.println(commonObjType);
-        return commonObjType;
+        // System.out.println(commonObjString.charAt(0));
+        return commonObjString.charAt(0);
 
     }
 

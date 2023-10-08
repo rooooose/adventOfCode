@@ -8,7 +8,7 @@ public class Solver {
     public static void main(String... args){
 
         RucksackInputReader rucksackInputReader = new RucksackInputReader();
-        String filePath = "day3//input_test.txt";
+        String filePath = "day3//day_3_input.txt";
         List<LinkedList<String>> rucksacks = null;
         RucksackManager rucksackManager = new RucksackManager();
         try {
@@ -19,20 +19,27 @@ public class Solver {
             System.exit(0);
         }
         char objType;
-        int prioritiesSum = 0;
+        char badgeType;
+        int groupPrioritiesSum = 0;
+        int compartmentsPrioritiesSum = 0;
         for (LinkedList<String> rucksackGroup : rucksacks) {
-            objType = rucksackManager.findCommonObjectType(rucksackGroup);
-            prioritiesSum += rucksackManager.findPriority(objType);
-
             for (String rucksack : rucksackGroup) {
-                LinkedList<String> compartmentsContent = rucksackManager.separateCompartments(rucksack);
-                objType = rucksackManager.findCommonObjectType(compartmentsContent);
-                // prioritiesSum += rucksackManager.findPriority(objType);
+                    LinkedList<String> compartmentsContent = rucksackManager.separateCompartments(rucksack);
+                    System.out.println(compartmentsContent);
+                    objType = rucksackManager.findCommonObjectType(compartmentsContent);
+                    compartmentsPrioritiesSum += rucksackManager.findPriority(objType);
             }
+        }
+        for (LinkedList<String> rucksackGroup : rucksacks) {
+            // System.out.println(rucksackGroup);
+            badgeType = rucksackManager.findCommonObjectType(rucksackGroup);
+            groupPrioritiesSum += rucksackManager.findPriority(badgeType);
             // System.out.println(rucksack);
             
         }
-        System.out.println(prioritiesSum);
+        
+        System.out.println(groupPrioritiesSum);
+        System.out.println(compartmentsPrioritiesSum);
         
     }
 }
